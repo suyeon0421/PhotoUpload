@@ -1,0 +1,27 @@
+<!-- public/index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>사진 업로드</title>
+</head>
+<body>
+  <h2>사진 업로드</h2>
+  <form id="uploadForm">
+    <input type="file" accept="image/*" capture="environment" name="photo" required>
+    <button type="submit">업로드</button>
+  </form>
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      await fetch('/api/upload', {
+        method: 'POST',
+        body: formData
+      });
+      alert('업로드 완료!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
